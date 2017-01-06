@@ -1,0 +1,19 @@
+{
+  "version": "0.1.0",
+  "name": "reactexample",
+  "description": "ReactJS Example",
+  "launch_path": "index.html",
+  "icons": {
+    "48": "/img/omrs-button.png"
+  },
+  "developer": {
+    "name": "djazayeri",
+    "url": "https://github.com/djazayeri/openmrs-owa-reactexample"
+  },
+  "default_locale": "en",
+  "activities": {
+    "openmrs": {
+      "href": "*"
+    }
+  }
+}
