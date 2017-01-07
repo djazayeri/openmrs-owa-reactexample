@@ -74,3 +74,9 @@ header .logo img {
 .instructions {
     align-self: center;
 }
+
+a.active {
+    color: #363463;
+    font-weight: bold;
+    text-decoration: none;
+}

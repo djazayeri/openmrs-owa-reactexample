@@ -144,7 +144,8 @@ var webpackConfig = {
         vendor: [
             'react',
             'react-router',
-            'whatwg-fetch'
+            'whatwg-fetch',
+            'moment'
         ]
     },
     devtool: devtool,
@@ -174,8 +175,7 @@ var webpackConfig = {
         }],
     },
     resolve: {
-        root: path.resolve('./src'),
-        extensions: ['', '.js'],
+        extensions: ['', '.js', '.jsx'],
     },
     plugins,
     externals: nodeModules,
