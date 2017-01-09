@@ -1,6 +1,7 @@
 import React from 'react';
-
 import moment from 'moment';
+
+import patientService from '../services/PatientService'
 
 export default class ShowPatient extends React.Component {
 
@@ -8,21 +9,9 @@ export default class ShowPatient extends React.Component {
         super(props);
         this.state = {loading: true};
 
-        // bad style to include this ajax call in the display component; I'll move it when I add redux
-        fetch('/openmrs/ws/rest/v1/patient/' + this.props.params.patientUuid + '?v=full', {
-            credentials: 'same-origin',
-            Accept: 'application/json'
-        })
-                .then((response) => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
-                    }
-                    else {
-                        throw new Error(response.statusText);
-                    }
-                })
-                .then((json) => {
-                    this.setState({loading: false, patient: json});
+        patientService.getPatient(this.props.params.patientUuid)
+                .then((data) => {
+                    this.setState({loading: false, patient: data});
                 });
     }
 

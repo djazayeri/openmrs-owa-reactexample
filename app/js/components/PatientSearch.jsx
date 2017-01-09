@@ -1,5 +1,6 @@
 import React from 'react';
 
+import patientService from '../services/PatientService'
 import PatientList from './PatientList'
 
 export default class PatientSearch extends React.Component {
@@ -12,24 +13,12 @@ export default class PatientSearch extends React.Component {
         let query = event.target.value;
         if (query.length > 1) {
             // doing the ajax query here is bad style; I'll clean this up when I introduce redux
-            var req = fetch('/openmrs/ws/rest/v1/patient?q=' + event.target.value, {
-                credentials: 'same-origin',
-                Accept: 'application/json'
-            });
-            this.setState({patients: {loading: req}});
-            req
-                    .then((response) => {
-                        if (response.status >= 200 && response.status < 300) {
-                            return response.json();
-                        }
-                        else {
-                            throw new Error(response.statusText);
-                        }
-                    })
-                    .then((json) => {
-                              if (this.state.patients.loading === req) {
+            var promise = patientService.findPatients(event.target.value)
+            this.setState({patients: {loading: promise}});
+            promise.then((data) => {
+                             if (this.state.patients.loading === promise) {
                                   // only use results if they were the last ones requested
-                                  this.setState({loading: false, patients: json.results});
+                                 this.setState({loading: false, patients: data.results});
                               }
                           }
                     );
