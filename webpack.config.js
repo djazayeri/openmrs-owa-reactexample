@@ -144,6 +144,10 @@ var webpackConfig = {
         vendor: [
             'react',
             'react-router',
+            'redux',
+            'redux-promise-middleware',
+            'redux-thunk',
+            'react-redux',
             'whatwg-fetch',
             'moment'
         ]

@@ -12,18 +12,17 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router'
+import {Provider} from 'react-redux'
 
-import App from './components/App'
-import FindPatient from './components/FindPatient'
-import ShowPatient from './components/ShowPatient'
-import Help from './components/Help'
+import createStore from './redux-store'
+import routes from './routes'
+
+let store = createStore();
 
 render((
-               <Router history={hashHistory}>
-                   <Route path="/" component={App}>
-                       <Route path="/findPatient" component={FindPatient}/>
-                       <Route path="/showPatient/:patientUuid" component={ShowPatient}/>
-                       <Route path="/help" component={Help}/>
-                   </Route>
-               </Router>
+               <Provider store={store}>
+                   <Router history={hashHistory}>
+                       {routes(store)}
+                   </Router>
+               </Provider>
        ), document.getElementById('app'));

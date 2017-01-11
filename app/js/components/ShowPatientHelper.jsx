@@ -3,17 +3,7 @@ import moment from 'moment';
 
 import patientService from '../services/PatientService'
 
-export default class ShowPatient extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {loading: true};
-
-        patientService.getPatient(this.props.params.patientUuid)
-                .then((data) => {
-                    this.setState({loading: false, patient: data});
-                });
-    }
+export default class ShowPatientHelper extends React.Component {
 
     ageFrom(birthdate) {
         return moment().diff(moment(birthdate), 'years')
@@ -30,17 +20,20 @@ export default class ShowPatient extends React.Component {
     }
 
     render() {
-        if (this.state.loading) {
+        if (this.props.loading) {
             return <div>Loading...</div>
         }
-        else {
-            let pt = this.state.patient;
+        else if (this.props.patient.person) {
+            let pt = this.props.patient;
             return (
                     <div>
                         <h2>{pt.person.preferredName.display}</h2>
                         <h3>{this.displayGender(pt.person)}, {this.ageFrom(pt.person.birthdate)} year(s)</h3>
                     </div>
             )
+        }
+        else {
+            return <div></div>
         }
     }
 }

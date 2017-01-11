@@ -17,6 +17,9 @@ class PatientService {
                         throw new Error(response.statusText);
                     }
                 })
+                .then((json) => {
+                    return json.results;
+                })
         return promise;
     }
 
