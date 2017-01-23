@@ -21,14 +21,14 @@ export default class ShowPatientHelper extends React.Component {
 
     render() {
         if (this.props.loading) {
-            return <div>Loading...</div>
+            return <div className="patient_loading">Loading...</div>
         }
         else if (this.props.patient.person) {
             let pt = this.props.patient;
             return (
-                    <div>
-                        <h2>{pt.person.preferredName.display}</h2>
-                        <h3>{this.displayGender(pt.person)}, {this.ageFrom(pt.person.birthdate)} year(s)</h3>
+                    <div className="patient">
+                        <h2 className="patient_display">{pt.person.preferredName.display}</h2>
+                        <h3 className="patient_age">{this.displayGender(pt.person)}, {this.ageFrom(pt.person.birthdate)} year(s)</h3>
                     </div>
             )
         }

@@ -20,7 +20,6 @@ export function patientSearch(state = [], action) {
         case PATIENT_SEARCH + '_PENDING':
             return {loading: true};
         case PATIENT_SEARCH + '_FULFILLED':
-            console.log(action);
             return action.payload;
         default:
             return state;
